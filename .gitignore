@@ -1,0 +1,12 @@
+.idea
+/client/node_modules
+/client/public/hot
+/client/public/storage
+/client/storage/*.key
+/client/vendor
+/client/.vagrant
+/client/Homestead.json
+/client/Homestead.yaml
+/client/npm-debug.log
+/client/yarn-error.log
+/client/.env
