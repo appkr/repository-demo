@@ -6,12 +6,23 @@ use Illuminate\Support\Collection;
 
 class RestEmployeeRepository implements EmployeeRepository
 {
+    private $apiClient;
+
+    public function __construct(EmployeeApiClient $apiClient)
+    {
+        $this->apiClient = $apiClient;
+    }
+
     public function listEmployees(): Collection
     {
-        $json = file_get_contents('http://foo:bar@localhost:8000');
-        $decoded = json_decode($json, true);
+        /**
+         * @var array $response [
+         *     ['name' => 'Foo'],
+         * ]
+         */
+        $response = $this->apiClient->listEmployees();
 
-        return Collection::make($decoded['data'])->map(function (array $employee) {
+        return Collection::make($response)->map(function (array $employee) {
             return new EmployeeDto($employee['name'] ?? '');
         });
     }
